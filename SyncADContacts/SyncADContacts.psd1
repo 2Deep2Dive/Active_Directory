@@ -19,10 +19,10 @@
     # PowerShellVersion = '5.1'
 
     # Which PowerShell Editions does this module work with? (Core, Desktop)
-    CompatiblePSEditions = @('Desktop', 'Core')
+    #CompatiblePSEditions = @('Desktop', 'Core')
 
     # Which PowerShell functions are exported from your module? (eg. Get-CoolObject)
-    FunctionsToExport = @('Sync-ADContacts')
+    FunctionsToExport = @('Sync-ADContact')
 
     # Which PowerShell aliases are exported from your module? (eg. gco)
     AliasesToExport = @('')
