@@ -1,4 +1,4 @@
-﻿function Sync-ADContacts{
+﻿function Sync-ADContact{
     [CmdletBinding()]
     param (
         [Parameter()]
