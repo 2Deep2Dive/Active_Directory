@@ -23,7 +23,7 @@
 ###############################################################################
 Properties {
     # The name of your module should match the basename of the PSD1 file.
-    $ModuleName = (Get-item -path $PSScriptRoot\*.psd1 | Foreach-Object {$null = Test-ModuleManifest -Path $_ -ErrorAction SilentlyContinue; if ($?) {$_}})[0].BaseName
+    $ModuleName = (Get-item -path $PSScriptRoot\*.psd1 | Foreach-Object {$null = Test-ModuleManifest -Path $_ ; if ($?) {$_}})[0].BaseName
     #$ModuleName = (Get-Item $PSScriptRoot\*.psd1)[0].BaseName
     # Path to the release notes file.  Set to $null if the release notes reside in the manifest file.
     $ReleaseNotesPath = $null
@@ -73,7 +73,7 @@ Task PostPublish {
 Task default -depends Build
 
 Task Analyze {
-    $SAResults = Invoke-ScriptAnalyzer -Path $PSScriptRoot -Recurse -Verbose:$false
+    $SAResults = Invoke-ScriptAnalyzer -Path "$PSScriptRoot\*.psm1" -Verbose:$false
     if($SAResults){
         $SAResults | Format-Table
         Write-Error -Message 'one or more Script Analyzer errors/warnings were found. Build cannot continue! '
