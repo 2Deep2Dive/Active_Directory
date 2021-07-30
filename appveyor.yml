@@ -12,7 +12,6 @@ environment:
   github_access_token:
     secure:
   ModuleName: SyncADContacts
-  PSModulePath: . .\SyncADContacts
 #---------------------------------#
 #      Analyze configuration      #
 #---------------------------------#
