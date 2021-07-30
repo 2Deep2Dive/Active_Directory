@@ -25,3 +25,6 @@ if($SAResults){
     $SAResults | Format-Table
     Write-Error -Message 'one or more Script Analyzer errors/warnings were found. Build cannot continue! '
 }
+else {
+    Write-Host "psake succeeded executing" -ForegroundColor Green
+}
