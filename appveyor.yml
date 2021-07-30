@@ -15,7 +15,7 @@ environment:
 #---------------------------------#
 #      Analyze configuration      #
 #---------------------------------#
-analyze_script:
+before_build:
   - ps: .\AppVeyor\AppVeyorAnalyze.ps1
 
 #---------------------------------#
