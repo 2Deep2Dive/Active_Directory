@@ -14,17 +14,25 @@
 #---------------------------------#
 # Header                          #
 #---------------------------------#
+[cmdletbinding()]
+param([string[]]$Task = 'Analyze')
+$ErrorActionPreference = 'Stop'
+
 Write-Host 'Running AppVeyor Analyze script' -ForegroundColor Yellow
 Write-Host "Current working directory: $pwd"
 
 #---------------------------------#
 # Run Pester Tests                #
 #---------------------------------#
-$SAResults = Invoke-ScriptAnalyzer -Path "$PSScriptRoot\*.psm1" -Verbose:$false
+Invoke-psake -buildFile ".\*\SyncADContacts.build.ps1" -taskList $Task -Verbose:$VerbosePreference
+if ($psake.build_success -eq $false) {exit 1 } else { exit 0 }
+
+
+<# $SAResults = Invoke-ScriptAnalyzer -Path "$PSScriptRoot\*.psm1" -Verbose:$false
 if($SAResults){
     $SAResults | Format-Table
     Write-Error -Message 'one or more Script Analyzer errors/warnings were found. Build cannot continue! '
 }
 else {
     Write-Host "psake succeeded executing" -ForegroundColor Green
-}
+} #>
