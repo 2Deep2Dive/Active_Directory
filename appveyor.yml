@@ -1,0 +1,43 @@
+#---------------------------------#
+#      environment configuration  #
+#---------------------------------#
+version: 0.1.{build}
+os: WMF 5
+install:
+  - ps: . .\AppVeyor\AppVeyorInstall.ps1
+
+environment:
+  nugetKey:
+    secure:
+  github_access_token:
+    secure:
+  ModuleName:
+#---------------------------------#
+#      build configuration        #
+#---------------------------------#
+build_script:
+  - ps: . .\AppVeyor\AppVeyorBuild.ps1
+
+#---------------------------------#
+#      test configuration         #
+#---------------------------------#
+test_script:
+  - ps: . .\AppVeyor\AppVeyorTest.ps1
+
+#---------------------------------#
+#      deployment configuration   #
+#---------------------------------#
+deploy_script:
+  - ps: . .\AppVeyor\AppveyorDeploy.ps1
+
+#---------------------------------#
+#    notification configuration   #
+#---------------------------------#
+notifications:
+- provider: Email
+  to:
+  - mohamed.eliwa@outlook.com
+  subject: AppVeyor - Active_Directory Build Notification
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true
