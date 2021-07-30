@@ -1,6 +1,4 @@
-﻿# Copyright (c) 2017 Chocolatey Software, Inc.
-# Copyright (c) 2013 - 2017 Lawrence Gripper & original authors/contributors from https://github.com/chocolatey/cChoco
-#
+﻿
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -36,9 +34,13 @@ Write-Host "Installed NuGet version '$($pkg.version)'"
 #To used incase a min or max version is required
 #[version]$ScriptAnalyzerVersion = '1.19.1'
 #[version]$PesterVersion = '5.2.2'
+Write-Host 'Installing PSScriptAnalyzer' -ForegroundColor Yellow
 Install-Module -Name 'PSScriptAnalyzer' -Force -ErrorAction Stop
+Write-Host 'Installing Pester' -ForegroundColor Yellow
 Install-Module -Name 'Pester'  -Force -ErrorAction Stop
+Write-Host 'Installing Psake' -ForegroundColor Yellow
 Install-Module -Name 'Psake'  -Force -ErrorAction Stop
+Write-Host 'Installing PSDeploy' -ForegroundColor Yellow
 Install-Module -Name 'PSDeploy'  -Force -ErrorAction Stop
 
 #---------------------------------#
