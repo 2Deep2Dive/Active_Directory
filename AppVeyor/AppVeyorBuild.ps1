@@ -11,6 +11,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+#---------------------------------#
+# Update PSModulePath             #
+#---------------------------------#
+#Write-Host 'Updating PSModulePath for testing'
+#$env:PSModulePath = $env:PSModulePath + ";" + "C:\projects\Sync"
+
 #---------------------------------#
 # Header                          #
 #---------------------------------#
@@ -20,7 +27,7 @@ Write-Host "Build version : $env:APPVEYOR_BUILD_VERSION"
 Write-Host "Author        : $env:APPVEYOR_REPO_COMMIT_AUTHOR"
 Write-Host "Branch        : $env:APPVEYOR_REPO_BRANCH"
 Write-Host "Repo          : $env:APPVEYOR_REPO_NAME"
-Write-Host "PSModulePath  : $env:PSModulePath -split ';'"
+Write-Host "PSModulePath  : $env:PSModulePath" -split ';'
 
 #---------------------------------#
 # BuildScript                     #
