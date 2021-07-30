@@ -22,7 +22,7 @@ Write-Host 'Running AppVeyor Analyze script' -ForegroundColor Yellow
 Write-Host "Current working directory: $pwd"
 
 #---------------------------------#
-# Run Pester Tests                #
+# Run Psake to Analyze the code   #
 #---------------------------------#
 Invoke-psake -buildFile ".\*\SyncADContacts.build.ps1" -taskList $Task -Verbose:$VerbosePreference
 if ($psake.build_success -eq $false) {exit 1 } else { exit 0 }
