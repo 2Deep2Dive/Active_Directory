@@ -27,7 +27,7 @@ Write-Host "Build version : $env:APPVEYOR_BUILD_VERSION"
 Write-Host "Author        : $env:APPVEYOR_REPO_COMMIT_AUTHOR"
 Write-Host "Branch        : $env:APPVEYOR_REPO_BRANCH"
 Write-Host "Repo          : $env:APPVEYOR_REPO_NAME"
-Write-Host "PSModulePath  : . .\SyncADContacts"
+Write-Host "PSModulePath  : C:\projects\active-directory\SyncADContacts\"
 
 #---------------------------------#
 # BuildScript                     #
