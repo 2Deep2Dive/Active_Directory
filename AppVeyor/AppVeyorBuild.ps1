@@ -11,25 +11,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-#---------------------------------#
-# Update PSModulePath             #
-#---------------------------------#
-#Write-Host 'Updating PSModulePath for testing'
-#$env:PSModulePath = $env:PSModulePath + ";" + "C:\projects\Sync"
-
 #---------------------------------#
 # Header                          #
 #---------------------------------#
+[cmdletbinding()]
+param([string[]]$Task = 'Build')
+$ErrorActionPreference = 'Stop'
 Write-Host 'Running AppVeyor build script' -ForegroundColor Yellow
 Write-Host "ModuleName    : $env:ModuleName"
 Write-Host "Build version : $env:APPVEYOR_BUILD_VERSION"
 Write-Host "Author        : $env:APPVEYOR_REPO_COMMIT_AUTHOR"
 Write-Host "Branch        : $env:APPVEYOR_REPO_BRANCH"
 Write-Host "Repo          : $env:APPVEYOR_REPO_NAME"
-Write-Host "PSModulePath  : C:\projects\active-directory\SyncADContacts\"
+Write-Host "Current working directory: $pwd"
 
 #---------------------------------#
 # BuildScript                     #
 #---------------------------------#
-Write-Host 'Nothing to build, skipping.....'
+Invoke-psake -buildFile ".\*\SyncADContacts.build.ps1" -taskList $Task -Verbose:$VerbosePreference
+if ($psake.build_success -eq $false) {exit 1 } else { exit 0 }
