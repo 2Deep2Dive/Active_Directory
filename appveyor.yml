@@ -21,8 +21,8 @@ before_build:
 #---------------------------------#
 #      build configuration        #
 #---------------------------------#
-build_script:
-  - ps: . .\AppVeyor\AppVeyorBuild.ps1
+#build_script:
+ # - ps: . .\AppVeyor\AppVeyorBuild.ps1
 
 #---------------------------------#
 #      test configuration         #
