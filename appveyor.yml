@@ -1,4 +1,11 @@
 #---------------------------------#
+#      General configuration      #
+#---------------------------------#
+skip_commits:
+  files:
+    - README.md
+  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/
+#---------------------------------#
 #      environment configuration  #
 #---------------------------------#
 version: 0.1.{build}
