@@ -20,6 +20,8 @@ environment:
   NugetServer: https://www.nuget.org/packages/manage/upload
   NugetToken:
     secure: 1xSdzIKmF3hKcNqqb1UKjplB1Sia3TRuA4lIIFL5sGyPEsTpz/0EHOBqPZPVRczr
+  PSGToken:
+    secure: Qs1MBHwhmS/VrTi1tumkitg0sRl13HhBn366S3BidI2FFQSt4CAxpwy0wq94Vkm7
   ModuleName: SyncADContacts
 #---------------------------------#
 #      Analyze configuration      #
