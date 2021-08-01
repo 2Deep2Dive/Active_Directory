@@ -17,13 +17,13 @@
 [cmdletbinding()]
 param([string[]]$Task = 'Build')
 $ErrorActionPreference = 'Stop'
-Write-Host 'Running AppVeyor build script' -ForegroundColor Yellow
-Write-Host "ModuleName    : $env:ModuleName"
-Write-Host "Build version : $env:APPVEYOR_BUILD_VERSION"
-Write-Host "Author        : $env:APPVEYOR_REPO_COMMIT_AUTHOR"
-Write-Host "Branch        : $env:APPVEYOR_REPO_BRANCH"
-Write-Host "Repo          : $env:APPVEYOR_REPO_NAME"
-Write-Host "Current working directory: $pwd"
+Write-Output 'Running AppVeyor build script' -ForegroundColor Yellow
+Write-Output "ModuleName    : $env:ModuleName"
+Write-Output "Build version : $env:APPVEYOR_BUILD_VERSION"
+Write-Output "Author        : $env:APPVEYOR_REPO_COMMIT_AUTHOR"
+Write-Output "Branch        : $env:APPVEYOR_REPO_BRANCH"
+Write-Output "Repo          : $env:APPVEYOR_REPO_NAME"
+Write-Output "Current working directory: $pwd"
 
 #---------------------------------#
 # BuildScript                     #
