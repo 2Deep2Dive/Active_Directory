@@ -8,7 +8,7 @@ skip_commits:
 #---------------------------------#
 #      environment configuration  #
 #---------------------------------#
-version: 0.1.{build}
+version: 1.0.{build}
 os: WMF 5
 install:
   - ps: . .\AppVeyor\AppVeyorInstall.ps1
