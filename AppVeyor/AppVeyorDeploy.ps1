@@ -1,6 +1,4 @@
-﻿# Copyright (c) 2017 Chocolatey Software, Inc.
-# Copyright (c) 2013 - 2017 Lawrence Gripper & original authors/contributors from https://github.com/chocolatey/cChoco
-#
+﻿#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -33,8 +31,8 @@ Write-Information "Updating module manifest to version: $env:APPVEYOR_BUILD_VERS
 #---------------------------------#
 # Publish to PS Gallery           #
 #---------------------------------#
-
-if ( ($env:APPVEYOR_REPO_NAME -notmatch '2Deep2Dive/Active_Directory') -or (!$env:APPVEYOR_REPO_TAG_NAME) )
+Write-Information env:APPVEYOR_REPO_NAME
+if ( ($env:APPVEYOR_REPO_NAME -notlike '2Deep2Dive/Active_Directory') -or (!$env:APPVEYOR_REPO_TAG_NAME) )
 {
     Write-Output "Finished testing of branch: $env:APPVEYOR_REPO_BRANCH - Exiting"
     exit;
