@@ -6,17 +6,17 @@
 
     CompanyName = ''
 
-    ModuleVersion = '0.1'
+    ModuleVersion = '1.0.0'
 
     # Use the New-Guid command to generate a GUID, and copy/paste into the next line
     GUID = '1056419a-4f94-4f86-9f46-5ce1e142c874'
 
-    Copyright = '2021 Copyright Holder'
+    Copyright = 'Copyright (c) 2021 Mohamed Eliwa'
 
     Description = 'Sync contacts information between a CSV file and Active Directory, and remove older contacts '
 
     # Minimum PowerShell version supported by this module (optional, recommended)
-    # PowerShellVersion = '5.1'
+    PowerShellVersion = '5.1'
 
     # Which PowerShell Editions does this module work with? (Core, Desktop)
     #CompatiblePSEditions = @('Desktop', 'Core')
