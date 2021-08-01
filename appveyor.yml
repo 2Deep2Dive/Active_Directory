@@ -14,8 +14,8 @@ install:
   - ps: . .\AppVeyor\AppVeyorInstall.ps1
 
 environment:
-  nugetKey:
-    secure: oy2gwcqr63eqo6fbij3anckjeqjjtltunk3tigr5cc4gay
+  GitHub_Token:
+    secure: Gkp3fsNKmEhzYMZQ7sdwcTbjvejeBxIdss4yOM5r446mG00wKAbiZF/3qIugEwqw
   github_access_token:
     secure:
   ModuleName: SyncADContacts
@@ -40,8 +40,24 @@ build_script:
 #---------------------------------#
 #      deployment configuration   #
 #---------------------------------#
-#deploy_script:
- # - ps: . .\AppVeyor\AppveyorDeploy.ps1
+deploy:
+- provider: NuGet
+  server: https://www.nuget.org/packages/manage/upload
+  api_key:
+    secure: oy2gwcqr63eqo6fbij3anckjeqjjtltunk3tigr5cc4gay
+  skip_symbols: false
+  symbol_server:           # remove to push symbols to SymbolSource.org
+  artifact: /.*(\.|\.s)nupkg/
+
+- provider: NuGet
+  server: https://nuget.pkg.github.com/2Deep2Dive/index.json
+  artifact: /.nupkg/
+  username:
+  api_key:
+    secure: $GitHub_Token
+
+deploy_script:
+  - ps: . .\AppVeyor\AppveyorDeploy.ps1
 
 #---------------------------------#
 #    notification configuration   #
