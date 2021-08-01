@@ -34,7 +34,7 @@
     PrivateData = @{
         PSData = @{
             # What keywords represent your PowerShell module? (eg. cloud, tools, framework, vendor)
-            Tags = @('Active Directory', 'Microsft', 'Contacts', 'tools', 'sync')
+            Tags = @('Active_Directory', 'Microsft', 'Contacts', 'tools', 'sync')
 
             # What software license is your code being released under? (see https://opensource.org/licenses)
             LicenseUri = 'https://opensource.org/licenses'
