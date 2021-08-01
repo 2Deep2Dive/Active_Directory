@@ -15,7 +15,7 @@ install:
 
 environment:
   nugetKey:
-    secure:
+    secure: oy2gwcqr63eqo6fbij3anckjeqjjtltunk3tigr5cc4gay
   github_access_token:
     secure:
   ModuleName: SyncADContacts
