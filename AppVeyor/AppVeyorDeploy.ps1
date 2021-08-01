@@ -24,7 +24,7 @@ Write-Warning 'Running AppVeyor deploy script'
 # Update module manifest          #
 #---------------------------------#
 Write-Warning 'Creating new module manifest'
-$ModuleManifestPath = Join-Path -path ("$pwd"+"$env:ModuleName"+"\Release\") -ChildPath (("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')))
+$ModuleManifestPath = Join-Path -path ("$pwd"+"$env:ModuleName"+"\Release\") -ChildPath ("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')
 Write-Warning "The path to the module manifest is $ModuleManifestpath"
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
 Write-Information "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
