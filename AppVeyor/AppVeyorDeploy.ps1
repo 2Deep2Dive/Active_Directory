@@ -23,9 +23,9 @@ Write-Warning 'Running AppVeyor deploy script'
 #---------------------------------#
 Write-Information 'Creating new module manifest'
 $ModuleManifestPath = Join-Path -path ("$pwd"+"\"+"$env:ModuleName"+"\Release\") -ChildPath ("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')
-Write-Warning "The path to the module manifest is $ModuleManifestpath"
+Write-Information "The path to the module manifest is $ModuleManifestpath"
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
-Write-Information "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
+Write-Warning "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
 [regex]::replace($ModuleManifest,'(ModuleVersion = )(.*)',"`$1'$env:APPVEYOR_BUILD_VERSION'") | Out-File -LiteralPath $ModuleManifestPath
 
 #---------------------------------#
@@ -41,7 +41,7 @@ if ($env:APPVEYOR_REPO_NAME -notlike '2Deep2Dive/Active_Directory')
 
 try {
 
-    Write-Output  "Publishing module: "
+    Write-Output  "Publishing module: $env:ModuleName"
     #Publish-Module -Name $env:ModuleName -NuGetApiKey $env:PSGToken -Verbose;
     #Publish-Module -Path $env:GitHubServer -NuGetApiKey $env:GitBubToken -Verbose;
 }
