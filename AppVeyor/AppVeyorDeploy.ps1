@@ -19,18 +19,15 @@
 [cmdletbinding()]
 param([string[]]$Task = 'Publish')
 $ErrorActionPreference = 'Stop'
-Write-Host 'Running AppVeyor deploy script' -ForegroundColor Yellow
-
+Write-Warning 'Running AppVeyor deploy script'
 #---------------------------------#
 # Update module manifest          #
 #---------------------------------#
-Write-Host 'Creating new module manifest'
-
-$ModuleManifestPath = Join-Path -path "$pwd"+"$env:ModuleName"+\Release\" -ChildPath ("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')
-Write-Host "The path to the module manifest is $ModuleManifestpath" -ForegroundColor Yellow
+Write-Warning 'Creating new module manifest'
+$ModuleManifestPath = Join-Path -path ("$pwd"+"$env:ModuleName"+"\Release\") -ChildPath (("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')))
+Write-Warning "The path to the module manifest is $ModuleManifestpath"
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
-
-Write-Host "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
+Write-Information "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
 [regex]::replace($ModuleManifest,'(ModuleVersion = )(.*)',"`$1'$env:APPVEYOR_BUILD_VERSION'") | Out-File -LiteralPath $ModuleManifestPath
 
 #---------------------------------#
@@ -39,11 +36,22 @@ Write-Host "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
 
 if ( ($env:APPVEYOR_REPO_NAME -notmatch 'Active_Directory') -or (!$env:APPVEYOR_REPO_TAG_NAME) )
 {
-    Write-Host "Finished testing of branch: $env:APPVEYOR_REPO_BRANCH - Exiting"
+    Write-Output "Finished testing of branch: $env:APPVEYOR_REPO_BRANCH - Exiting"
     exit;
 }
 
-Write-Host "Publishing module to Nuget Gallery: "
-Publish-Module -Path  -NuGetApiKey $env:nugetKey -Verbose
 
-Write-Host 'Done!' -ForegroundColor Green
+try {
+    Write-Output  "Publishing module: "
+    Publish-Module -Path $env:NugetServer  -NuGetApiKey $env:NugetToken -Verbose;
+    Publish-Module -Path $env:GitHubServer -NuGetApiKey $env:GitBubToken -Verbose;
+}
+catch {
+    Write-Error "Publishing module failed!!"
+}
+Finally{
+    Write-Host 'Done!' -ForegroundColor Green
+}
+
+
+
