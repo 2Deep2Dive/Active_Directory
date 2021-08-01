@@ -26,7 +26,7 @@ Write-Host 'Running AppVeyor deploy script' -ForegroundColor Yellow
 #---------------------------------#
 Write-Host 'Creating new module manifest'
 
-$ModuleManifestPath = Join-Path -path "$pwd\Release" -ChildPath ("$env:ModuleName"+'.psd1')
+$ModuleManifestPath = Join-Path -path "$pwd\Release\" -ChildPath ("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')
 Write-Host "The path to the module manifest is $ModuleManifestpath" -ForegroundColor Yellow
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
 
