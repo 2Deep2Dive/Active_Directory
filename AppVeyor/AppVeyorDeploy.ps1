@@ -40,9 +40,10 @@ if ($env:APPVEYOR_REPO_NAME -notlike '2Deep2Dive/Active_Directory')
 
 
 try {
+
     Write-Output  "Publishing module: "
-    Publish-Module -Path $env:NugetServer  -NuGetApiKey $env:NugetToken -Verbose;
-    Publish-Module -Path $env:GitHubServer -NuGetApiKey $env:GitBubToken -Verbose;
+    Publish-Module -Name $env:ModuleName -NuGetApiKey $env:PSGToken -Verbose;
+    #Publish-Module -Path $env:GitHubServer -NuGetApiKey $env:GitBubToken -Verbose;
 }
 catch {
     Write-Error "Publishing module failed!!"
