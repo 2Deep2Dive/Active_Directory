@@ -16,6 +16,9 @@
 #---------------------------------#
 # Header                          #
 #---------------------------------#
+[cmdletbinding()]
+param([string[]]$Task = 'Publish')
+$ErrorActionPreference = 'Stop'
 Write-Host 'Running AppVeyor deploy script' -ForegroundColor Yellow
 
 #---------------------------------#
@@ -23,7 +26,8 @@ Write-Host 'Running AppVeyor deploy script' -ForegroundColor Yellow
 #---------------------------------#
 Write-Host 'Creating new module manifest'
 
-$ModuleManifestPath = Join-Path -path "$pwd" -ChildPath ("$env:ModuleName"+'.psd1')
+$ModuleManifestPath = Join-Path -path "$pwd\Release" -ChildPath ("$env:ModuleName"+'.psd1')
+Write-Host "The path to the module manifest is $ModuleManifestpath" -ForegroundColor Yellow
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
 
 Write-Host "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
@@ -39,7 +43,7 @@ if ( ($env:APPVEYOR_REPO_NAME -notmatch 'Active_Directory') -or (!$env:APPVEYOR_
     exit;
 }
 
-Write-Host "Publishing module to Powershell Gallery: "
-Publish-Module -Name $env:ModuleName -NuGetApiKey $env:nugetKey
+Write-Host "Publishing module to Nuget Gallery: "
+Publish-Module -Path  -NuGetApiKey $env:nugetKey -Verbose
 
 Write-Host 'Done!' -ForegroundColor Green
