@@ -21,17 +21,17 @@ Write-Warning 'Running AppVeyor deploy script'
 #---------------------------------#
 # Update module manifest          #
 #---------------------------------#
-Write-Warning 'Creating new module manifest'
+Write-Information 'Creating new module manifest'
 $ModuleManifestPath = Join-Path -path ("$pwd"+"\"+"$env:ModuleName"+"\Release\") -ChildPath ("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')
 Write-Warning "The path to the module manifest is $ModuleManifestpath"
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
-Write-Information "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
-[regex]::replace($ModuleManifest,'(ModuleVersion = )(.*)',"`$1'$env:APPVEYOR_BUILD_VERSION'") | Out-File -LiteralPath $ModuleManifestPath
+Write-Information "Updating module manifest to version: $env:VERSION"
+[regex]::replace($ModuleManifest,'(ModuleVersion = )(.*)',"`$1'$env:VERSION'") | Out-File -LiteralPath $ModuleManifestPath
 
 #---------------------------------#
 # Publish to PS Gallery           #
 #---------------------------------#
-Write-Information $env:APPVEYOR_REPO_NAME
+
 if ($env:APPVEYOR_REPO_NAME -notlike '2Deep2Dive/Active_Directory')
 {
     Write-Output "Finished testing of branch: $env:APPVEYOR_REPO_BRANCH - Exiting"
