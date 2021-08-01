@@ -17,7 +17,7 @@
 [cmdletbinding()]
 param([string[]]$Task = 'Publish')
 $ErrorActionPreference = 'Stop'
-Write-Warning 'Running AppVeyor deploy script'
+Write-Information 'Running AppVeyor deploy script'
 #---------------------------------#
 # Update module manifest          #
 #---------------------------------#
@@ -25,7 +25,7 @@ Write-Information 'Creating new module manifest'
 $ModuleManifestPath = Join-Path -path ("$pwd"+"\"+"$env:ModuleName"+"\Release\") -ChildPath ("$env:ModuleName"+"\"+"$env:ModuleName"+'.psd1')
 Write-Information "The path to the module manifest is $ModuleManifestpath"
 $ModuleManifest     = Get-Content $ModuleManifestPath -Raw
-Write-Warning "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
+Write-Information "Updating module manifest to version: $env:APPVEYOR_BUILD_VERSION"
 [regex]::replace($ModuleManifest,'(ModuleVersion = )(.*)',"`$1'$env:APPVEYOR_BUILD_VERSION'") | Out-File -LiteralPath $ModuleManifestPath
 
 #---------------------------------#
@@ -41,8 +41,8 @@ if ($env:APPVEYOR_REPO_NAME -notlike '2Deep2Dive/Active_Directory')
 
 try {
 
-    Write-Output  "Publishing module: $env:ModuleName"
-    #Publish-Module -Name $env:ModuleName -NuGetApiKey $env:PSGToken -Verbose;
+    Write-Information  "Publishing module: $env:ModuleName"
+    Publish-Module -Name $env:ModuleName -NuGetApiKey $env:PSGToken -Verbose;
     #Publish-Module -Path $env:GitHubServer -NuGetApiKey $env:GitBubToken -Verbose;
 }
 catch {
