@@ -10,3 +10,7 @@ It also removes any contacts in the AD that no longer exists in the import file
 Expects a CSV file with the following data and format
 name;surname;company;mail
 
+
+Note
+----
+This repository is mirrored to a project hosted at GitLab.com
