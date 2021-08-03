@@ -43,7 +43,7 @@ try {
 
     Write-Information  "Publishing module: $env:ModuleName"
     Publish-Module  -Path ("$pwd"+"\"+"$env:ModuleName"+"\Release\"+"$env:ModuleName")  -NuGetApiKey $env:PSGToken -Verbose;
-    #Publish-Module -Path $env:GitHubServer -NuGetApiKey $env:GitBubToken -Verbose;
+
 }
 catch {
     Write-Error "Publishing module failed!!"
