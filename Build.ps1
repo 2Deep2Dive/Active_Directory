@@ -9,20 +9,23 @@ if (!(Get-Module -Name PSScriptAnalyzer -ListAvailable)) { Install-Module -Name 
 
 switch ($Task) {
     'Analyze' {
-        Invoke-psake -buildFile ".\AppVoyer\appvoyerAnalyze.ps1" -taskList $Task -Verbose:$VerbosePreference
+        Write-Information 'Running AppVeyor Analyze script'
+        Invoke-psake -buildFile  ".\AppVeyor\SyncADContacts.analyze.ps1" -taskList $Task -Verbose:$VerbosePreference
 
     }
     'Build' {
-        Invoke-psake -buildFile ".\AppVoyer\appvoyerBild.ps1" -taskList $Task -Verbose:$VerbosePreference
+        Invoke-psake -buildFile ".\AppVoyer\appvoyer.bild.ps1" -taskList $Task -Verbose:$VerbosePreference
 
     }
     'Test' {
-        Invoke-psake -buildFile ".\AppVoyer\appvoyerTest.ps1" -taskList $Task -Verbose:$VerbosePreference
+        Invoke-psake -buildFile ".\AppVoyer\appvoyer.test.ps1" -taskList $Task -Verbose:$VerbosePreference
 
     }
     'Deploy' {
-        Invoke-psake -buildFile ".\AppVoyer\appvoyerDeploy.ps1" -taskList $Task -Verbose:$VerbosePreference
-
+        Invoke-psake -buildFile ".\AppVoyer\appvoyer.deploy.ps1" -taskList $Task -Verbose:$VerbosePreference
+    }
+    'Clean' {
+        Invoke-psake -buildFile ".\AppVoyer\appvoyer.clean.ps1" -taskList $Task -Verbose:$VerbosePreference
     }
     Default {}
 }
