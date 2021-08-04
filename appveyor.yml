@@ -4,7 +4,7 @@
 skip_commits:
   files:
     - README.md
-  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/
+  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/|local test
 #---------------------------------#
 #      environment configuration  #
 #---------------------------------#
