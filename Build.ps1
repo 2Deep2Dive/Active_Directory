@@ -6,5 +6,25 @@ if (!(Get-Module -Name Pester -ListAvailable)) { Install-Module -Name Pester -Fo
 if (!(Get-Module -Name psake -ListAvailable)) { Install-Module -Name psake -MinimumVersion 4.8.0 -Force} else{update-Module -Name psake -Force}
 if (!(Get-Module -Name PSDeploy -ListAvailable)) { Install-Module -Name PSDeploy -Force -Verbose}        else{update-Module -Name PSDeploy -Force}
 if (!(Get-Module -Name PSScriptAnalyzer -ListAvailable)) { Install-Module -Name PSScriptAnalyzer -Force} else{Update-Module -Name PSScriptAnalyzer -Force}
-Invoke-psake -buildFile ".\*\SyncADContacts.build.ps1" -taskList $Task -Verbose:$VerbosePreference
+
+switch ($Task) {
+    'Analyze' {
+        Invoke-psake -buildFile ".\AppVoyer\appvoyerAnalyze.ps1" -taskList $Task -Verbose:$VerbosePreference
+
+    }
+    'Build' {
+        Invoke-psake -buildFile ".\AppVoyer\appvoyerBild.ps1" -taskList $Task -Verbose:$VerbosePreference
+
+    }
+    'Test' {
+        Invoke-psake -buildFile ".\AppVoyer\appvoyerTest.ps1" -taskList $Task -Verbose:$VerbosePreference
+
+    }
+    'Deploy' {
+        Invoke-psake -buildFile ".\AppVoyer\appvoyerDeploy.ps1" -taskList $Task -Verbose:$VerbosePreference
+
+    }
+    Default {}
+}
+
 if ($psake.build_success -eq $false) {exit 1 } else { exit 0 }
