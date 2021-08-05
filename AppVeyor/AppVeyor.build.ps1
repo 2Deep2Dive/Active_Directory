@@ -14,9 +14,43 @@
 #---------------------------------#
 # Header                          #
 #---------------------------------#
-[cmdletbinding()]
-param([string[]]$Task = 'Build')
-$ErrorActionPreference = 'Stop'
+Properties {
+    # The name of your module should match the basename of the PSD1 file.
+    $ModuleName = (Get-item -path $PSScriptRoot\*.psd1 | Foreach-Object {$null = Test-ModuleManifest -Path $_ ; if ($?) {$_}})[0].BaseName
+    # Path to the release notes file.  Set to $null if the release notes reside in the manifest file.
+    $ReleaseNotesPath = $null
+
+    # The directory used to publish the module from.  If you are using Git, the
+    # $PublishRootDir should be ignored if it is under the workspace directory.
+    $PublishRootDir = "$PSScriptRoot\Release"
+    $PublishDir     = "$PublishRootDir\$ModuleName"
+    # The following items will not be copied to the $PublishDir.
+    # Add items that should not be published with the module.
+    $Exclude = @(
+        (Split-Path $PSCommandPath -Leaf),
+        'Release',
+        'Tests',
+        '.git*',
+        '.vscode',
+        '*.psproj',
+        '*.psbuild',
+        '*.psprojs',
+        # These files are unique to this examples dir.
+        'Test-Module.ps1',
+        'PSScriptAnalyzerSettings.psd1',
+        'Readme.md',
+        'Stop*.ps1'
+    )
+    # Name of the repository you wish to publish to. Default repo is the PSGallery.
+    $PublishRepository = "$PublishRepoName"
+
+    # Your NuGet API key for the PSGallery.  Leave it as $null and the first time
+    # you publish you will be prompted to enter your API key.  The build will
+    # store the key encrypted in a file, so that on subsequent publishes you
+    # will no longer be prompted for the API key.
+    $NuGetApiKey = $null
+    $EncryptedApiKeyPath = "$env:LOCALAPPDATA\vscode-powershell\NuGetApiKey.clixml"
+}
 Write-Output 'Running AppVeyor build script' -ForegroundColor Yellow
 Write-Output "ModuleName    : $env:ModuleName"
 Write-Output "Build version : $env:APPVEYOR_BUILD_VERSION"
