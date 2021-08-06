@@ -4,14 +4,14 @@
 skip_commits:
   files:
     - README.md
-  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/
+  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/|local test
 #---------------------------------#
 #      environment configuration  #
 #---------------------------------#
 version: 1.0.{build}
 os: WMF 5
 install:
-  - ps: . .\AppVeyor\AppVeyorInstall.ps1
+  - ps: . .\AppVeyor\AppVeyor.install.ps1
 
 environment:
   GitHubServer: https://nuget.pkg.github.com/2Deep2Dive/index.json
@@ -27,19 +27,19 @@ environment:
 #      Analyze configuration      #
 #---------------------------------#
 before_build:
-  - ps: . .\AppVeyor\AppVeyorAnalyze.ps1
+  - ps: . .\AppVeyor\AppVeyor.analyze.ps1
 
 #---------------------------------#
 #      build configuration        #
 #---------------------------------#
 build_script:
-  - ps: . .\AppVeyor\AppVeyorBuild.ps1
+  - ps: . .\AppVeyor\AppVeyor.build.ps1
 
 #---------------------------------#
 #      test configuration         #
 #---------------------------------#
 #test_script:
- # - ps: . .\AppVeyor\AppVeyorTest.ps1
+ # - ps: . .\AppVeyor\AppVeyor.test.ps1
 
 #---------------------------------#
 #      deployment configuration   #
